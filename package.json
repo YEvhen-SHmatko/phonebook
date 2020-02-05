@@ -20,7 +20,7 @@
     "styled-components": "^5.0.0",
     "styled-transition-group": "^2.0.0"
   },
-  "homepage": "https://yevhen-shmatko.github.io/goit-react-hw-06-phonebook",
+
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
