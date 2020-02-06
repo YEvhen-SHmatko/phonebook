@@ -5,6 +5,19 @@
   font-family: 'Arial Narrow', Arial, sans-serif;
   color: rgb(43, 43, 77);
 }
+
+/* Chrome, Safari, Edge, Opera */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
 .section {
   display: flex;
   flex-direction: column;

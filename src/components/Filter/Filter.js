@@ -9,6 +9,7 @@ import * as filterActions from '../../redux/filter/filterActions';
 
 const INIT_STATE = {
   input: '',
+  active: false,
 };
 class Filter extends Component {
   static propTypes = {
@@ -19,15 +20,34 @@ class Filter extends Component {
     ...INIT_STATE,
   };
 
+  staticSubmit = () => {
+    const { input } = this.state;
+    const { onSubmit } = this.props;
+    onSubmit(input);
+    this.setState({ active: false });
+  };
+
+  timeoutSubmit = () => {
+    let timeoutID;
+    const submit = () => {
+      this.staticSubmit();
+      window.clearTimeout(timeoutID);
+    };
+    timeoutID = window.setTimeout(submit, 800);
+  };
+
   handleChange = e => {
+    const { active } = this.state;
     this.setState({ [e.target.name]: e.target.value });
+    if (active === false) {
+      this.timeoutSubmit();
+      this.setState({ active: true });
+    }
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const { input } = this.state;
-    const { onSubmit } = this.props;
-    onSubmit(input);
+    this.staticSubmit();
   };
 
   handleOnClean = e => {
@@ -48,6 +68,7 @@ class Filter extends Component {
               <span className={Styles['form__input-wrap']}>
                 <input
                   className={Styles.form__input}
+                  onInput={this.mySubmit}
                   onChange={this.handleChange}
                   value={input}
                   name="input"

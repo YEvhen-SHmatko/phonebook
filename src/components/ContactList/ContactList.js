@@ -13,7 +13,7 @@ const removeWithLocalStorage = (contacts, id) => {
 };
 const ContactList = ({ filterContacts, removeContact }) => {
   const clickDelete = btnContact => {
-    const { id } = btnContact.target;
+    const { id } = btnContact.currentTarget;
     removeContact(id);
     saveToLocalStorage('contacts', removeWithLocalStorage(filterContacts, id));
   };
@@ -34,10 +34,10 @@ const ContactList = ({ filterContacts, removeContact }) => {
                 <span className={Styles['item-number']}>{contact.number}</span>
               </div>
               <button
+                id={contact.id}
                 className={Styles.button}
                 type="button"
                 onClick={clickDelete}
-                id={contact.id}
               >
                 <i className="large material-icons">backspace</i>
               </button>

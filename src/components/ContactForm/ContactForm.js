@@ -65,19 +65,28 @@ class ContactForm extends Component {
   render() {
     const { nameId, numberId } = ALL_ID;
     const { name, number } = this.state;
-    const verificationLength = name.length === 0 || number.length === 0;
-    const verificationNumber = Number.isNaN(Number(number)) || number === null;
-    const isActiveButton = verificationLength || verificationNumber;
-    const isActive = isActiveButton ? Styles.disabled : Styles.button;
+    const nameIsValid = name.length > 5;
+    const numberIsValid = number.length >= 10 && number.length < 12;
+    const isActiveName =
+      nameIsValid || name.length === 0
+        ? Styles.form__input
+        : Styles['form__input-invalid'];
+    const isActiveNumber =
+      numberIsValid || number.length === 0
+        ? Styles.form__input
+        : Styles['form__input-invalid'];
+    const isActiveBTN = nameIsValid && numberIsValid;
+    const isActive = isActiveBTN ? Styles.button : Styles.disabled;
+
     return (
       <CSSTransition in timeout={250} unmountOnExit classNames={pop}>
         <section className={Styles.section__contact}>
           <form onSubmit={this.handleSubmit} className={Styles.form__contact}>
-            <label htmlFor={nameId} className={Styles['form__name-title']}>
+            <label htmlFor={nameId} className={Styles.form__title}>
               Name
               <input
                 id={nameId}
-                className={Styles['form__name-input']}
+                className={isActiveName}
                 onChange={this.handleChange}
                 value={name}
                 name="name"
@@ -85,23 +94,20 @@ class ContactForm extends Component {
                 placeholder="Input name"
               />
             </label>
-            <label htmlFor={numberId} className={Styles['form__name-title']}>
+            <label htmlFor={numberId} className={Styles.form__title}>
               Number
               <input
                 id={numberId}
-                className={Styles['form__name-input']}
+                type="number"
+                className={isActiveNumber}
+                required
                 onChange={this.handleChange}
                 value={number}
                 name="number"
-                type="tel"
-                placeholder="Input phone"
+                placeholder="Number 10 or 12 symbol"
               />
             </label>
-            <button
-              disabled={isActiveButton}
-              type="submit"
-              className={isActive}
-            >
+            <button disabled={!isActiveBTN} type="submit" className={isActive}>
               Add contact
             </button>
           </form>
