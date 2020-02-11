@@ -1,10 +1,14 @@
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
+import { composeWithDevTools } from 'redux-devtools-extension';
 import rootReducer from './rootReducer';
+import logger from './middleware/logger';
+import timeout from './middleware/timeout';
+import throttle from './middleware/throttle';
 
-const store = createStore(
-  rootReducer,
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-);
+const middleware = [logger, throttle, timeout];
+const enhancer = composeWithDevTools(applyMiddleware(...middleware));
+
+const store = createStore(rootReducer, enhancer);
 
 export default store;

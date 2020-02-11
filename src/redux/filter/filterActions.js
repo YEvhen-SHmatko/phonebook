@@ -1,19 +1,15 @@
 import types from './filterTypes';
 
-export const onChange = value => {
+const filterAction = value => {
   return {
     type: types.ON_CHANGE,
     payload: {
       filter: value,
     },
+    // meta: {
+    //   delay: 800,
+    //   throttle: 800,
+    // },
   };
 };
-export const onSubmit = value => {
-  return {
-    type: types.ON_SUBMIT,
-    payload: {
-      filter: value,
-    },
-  };
-};
-export const q = () => null;
+export default filterAction;
