@@ -8,11 +8,11 @@ import { saveToLocalStorage } from '../../services/localStorage';
 const removeWithLocalStorage = (contacts, id) => {
   return contacts.filter(contact => contact.id !== id);
 };
-const ContactList = ({ filterContacts, removeContact }) => {
+const ContactList = ({ сontacts, filterContacts, removeContact }) => {
   const clickDelete = btnContact => {
     const { id } = btnContact.currentTarget;
     removeContact(id);
-    saveToLocalStorage('contacts', removeWithLocalStorage(filterContacts, id));
+    saveToLocalStorage('contacts', removeWithLocalStorage(сontacts, id));
   };
 
   return (
@@ -47,6 +47,7 @@ const ContactList = ({ filterContacts, removeContact }) => {
 };
 ContactList.propTypes = {
   filterContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  сontacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeContact: PropTypes.func.isRequired,
 };
 
