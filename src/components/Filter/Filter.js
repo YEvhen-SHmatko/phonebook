@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import { connect } from 'react-redux';
@@ -12,13 +12,16 @@ const Filter = ({ input, handleChange }) => {
   const handleOnChange = e => {
     handleChange(e.target.value);
   };
+  const handleOnSubmit = e => {
+    e.preventDefault();
+  };
   const handleOnClean = e => {
     handleChange('');
   };
   return (
     <CSSTransition in timeout={250} unmountOnExit classNames={pop}>
       <section className={Styles.section__filter}>
-        <form className={Styles.form__filter}>
+        <form className={Styles.form__filter} onSubmit={handleOnSubmit}>
           <label htmlFor={ALL_ID.htmlFor} className={Styles.form__title}>
             <h4>Fined contacts by name</h4>
             <span className={Styles['form__input-wrap']}>

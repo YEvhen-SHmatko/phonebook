@@ -1,5 +1,9 @@
-export const getContacts = store => store.phoneBook.contacts;
-export const getFilter = store => store.phoneBook.filter;
+export const getContacts = store => {
+  return store.phoneBook.contacts;
+};
+export const getFilter = store => {
+  return store.phoneBook.filter;
+};
 export const getFilterContacts = store =>
   getContacts(store).filter(contact => {
     const nameContact = contact.name;

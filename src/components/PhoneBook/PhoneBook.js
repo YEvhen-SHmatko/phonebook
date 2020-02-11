@@ -12,8 +12,6 @@ import * as contactsActions from '../../redux/contacts/contactsActions';
 import * as selectors from '../../redux/selectors';
 import { getToLocalStorage } from '../../services/localStorage';
 
-//
-
 class PhoneBook extends Component {
   static propTypes = {
     contactsLength: PropTypes.number.isRequired,
@@ -49,14 +47,6 @@ class PhoneBook extends Component {
   }
 }
 
-// const PhoneBook = ({
-//   contactsLength,
-//   filterContactsLength,
-//   setContactsWithLocalStorage,
-// }) => {
-
-//   return
-// };
 const mapStateToProps = store => ({
   contactsLength: selectors.getContactsLength(store),
   filterContactsLength: selectors.getFilterContactsLength(store),
