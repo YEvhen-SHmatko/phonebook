@@ -1,15 +1,12 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ContactForm from '../ContactForm/ContactForm';
-import Filter from '../Filter/Filter';
-import ContactList from '../ContactList/ContactList';
+import ContactFormContainer from '../ContactForm/ContactFormContainer';
+import FilterContainer from '../Filter/FilterContainer';
+import ContactListContainer from '../ContactList/ContactListContainer';
 import Styles from './PhoneBook.module.css';
 import Error from '../Error/Error';
 import Title from '../Title/Title';
 import '../../transition/pnotify-style.css';
-import * as contactsActions from '../../redux/contacts/contactsActions';
-import * as selectors from '../../redux/selectors';
 import { getToLocalStorage } from '../../services/localStorage';
 
 class PhoneBook extends Component {
@@ -34,10 +31,10 @@ class PhoneBook extends Component {
         <Title size={34} animation>
           Phonebook
         </Title>
-        <ContactForm />
+        <ContactFormContainer />
         <Title size={24}>Contacts</Title>
-        {contactsLength > 1 && <Filter />}
-        {contactsLength > 0 && <ContactList />}
+        {contactsLength > 1 && <FilterContainer />}
+        {contactsLength > 0 && <ContactListContainer />}
         {contactsLength < 1 && <Error>Contact list is empty!</Error>}
         {filterContactsLength < 1 && contactsLength > 0 && (
           <Error>Contact not found!</Error>
@@ -47,13 +44,4 @@ class PhoneBook extends Component {
   }
 }
 
-const mapStateToProps = store => ({
-  contactsLength: selectors.getContactsLength(store),
-  filterContactsLength: selectors.getFilterContactsLength(store),
-});
-const mapDispatchToProps = dispatch => ({
-  setContactsWithLocalStorage: data =>
-    dispatch(contactsActions.setContactsWithLocalStorage(data)),
-  removeContact: id => dispatch(contactsActions.removeContact(id)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(PhoneBook);
+export default PhoneBook;

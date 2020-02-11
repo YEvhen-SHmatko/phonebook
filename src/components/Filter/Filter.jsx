@@ -1,12 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux';
 import pop from '../../transition/pop.module.css';
 import Styles from './Filter.module.css';
 import { ALL_ID } from '../../services/constants';
-import filterActions from '../../redux/filter/filterActions';
-import * as selectors from '../../redux/selectors';
 
 const Filter = ({ input, handleChange }) => {
   const handleOnChange = e => {
@@ -55,10 +52,4 @@ Filter.propTypes = {
   input: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
-const mapStateToProps = store => ({
-  input: selectors.getFilter(store),
-});
-const mapDispatchToProps = dispatch => ({
-  handleChange: value => dispatch(filterActions(value)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default Filter;

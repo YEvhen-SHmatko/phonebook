@@ -1,5 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import rootReducer from './rootReducer';
+import contactsReducers from './contacts/contactsReducers';
+import filterReducers from './filter/filterReducers';
 // import { applyMiddleware } from 'redux';
 // import { composeWithDevTools } from 'redux-devtools-extension';
 // import logger from './middleware/logger';
@@ -10,7 +11,10 @@ import rootReducer from './rootReducer';
 // const enhancer = composeWithDevTools(applyMiddleware(...middleware));
 
 const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    contacts: contactsReducers,
+    filter: filterReducers,
+  },
   // defaultEnhancers: enhancer,
   devTools: process.env.NODE_ENV,
 });

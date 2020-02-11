@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { TransitionGroup, CSSTransition } from 'react-transition-group';
-import { connect } from 'react-redux';
 import Styles from './ContactList.module.css';
 import slide from '../../transition/slide.module.css';
-import * as contactsActions from '../../redux/contacts/contactsActions';
-import * as selectors from '../../redux/selectors';
 import { saveToLocalStorage } from '../../services/localStorage';
 
 const removeWithLocalStorage = (contacts, id) => {
@@ -52,11 +49,5 @@ ContactList.propTypes = {
   filterContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeContact: PropTypes.func.isRequired,
 };
-const mapStateToProps = store => ({
-  filterContacts: selectors.getFilterContacts(store),
-});
-const mapDispatchToProps = dispatch => ({
-  addContact: data => dispatch(contactsActions.addContact(data)),
-  removeContact: id => dispatch(contactsActions.removeContact(id)),
-});
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
+
+export default ContactList;
