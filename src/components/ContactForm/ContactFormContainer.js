@@ -6,7 +6,7 @@ import ContactForm from './ContactForm';
 const mapStateToProps = store => ({
   contacts: selectors.getContacts(store),
 });
-const mapDispatchToProps = dispatch => ({
-  addContact: data => dispatch(contactsActions.addContact(data)),
-});
+const mapDispatchToProps = {
+  addContact: contactsActions.addContact,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

@@ -4,6 +4,7 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Styles from './ContactList.module.css';
 import slide from '../../transition/slide.module.css';
 import { saveToLocalStorage } from '../../services/localStorage';
+import { MUTE_NUMBER } from '../../services/constants';
 
 const removeWithLocalStorage = (contacts, id) => {
   return contacts.filter(contact => contact.id !== id);
@@ -28,7 +29,9 @@ const ContactList = ({ сontacts, filterContacts, removeContact }) => {
             <li key={contact.id} className={Styles.item}>
               <div className={Styles['item-wrap']}>
                 <span className={Styles['item-name']}>{contact.name}:</span>
-                <span className={Styles['item-number']}>{contact.number}</span>
+                <span className={Styles['item-number']}>
+                  {MUTE_NUMBER(contact.number)}
+                </span>
               </div>
               <button
                 id={contact.id}

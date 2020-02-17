@@ -6,7 +6,7 @@ import Filter from './Filter';
 const mapStateToProps = store => ({
   input: selectors.getFilter(store),
 });
-const mapDispatchToProps = dispatch => ({
-  handleChange: value => dispatch(filterActions(value)),
-});
+const mapDispatchToProps = {
+  handleChange: filterActions,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(Filter);

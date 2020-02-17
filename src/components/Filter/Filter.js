@@ -26,20 +26,20 @@ const Filter = ({ input, handleChange }) => {
                 className={Styles.form__input}
                 onChange={handleOnChange}
                 value={input}
+                autoComplete="off"
                 name="input"
                 type="text"
                 placeholder="Input fined contacts"
               />
               {input.length > 0 && (
-                <div
-                  role="button"
+                <button
+                  type="button"
                   tabIndex={0}
                   className={Styles.formInputBtn}
                   onClick={handleOnClean}
-                  onKeyPress={() => {}}
                 >
                   <i className="large material-icons">clear</i>
-                </div>
+                </button>
               )}
             </span>
           </label>

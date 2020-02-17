@@ -7,8 +7,8 @@ const mapStateToProps = store => ({
   filterContacts: selectors.getFilterContacts(store),
   сontacts: selectors.getContacts(store),
 });
-const mapDispatchToProps = dispatch => ({
-  addContact: data => dispatch(contactsActions.addContact(data)),
-  removeContact: id => dispatch(contactsActions.removeContact(id)),
-});
+const mapDispatchToProps = {
+  addContact: contactsActions.addContact,
+  removeContact: contactsActions.removeContact,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
