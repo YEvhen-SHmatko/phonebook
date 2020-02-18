@@ -5,7 +5,7 @@ import ContactList from './ContactList';
 
 const mapStateToProps = store => ({
   filterContacts: selectors.getFilterContacts(store),
-  сontacts: selectors.getContacts(store),
+  contacts: selectors.getContacts(store),
 });
 const mapDispatchToProps = {
   addContact: contactsActions.addContact,

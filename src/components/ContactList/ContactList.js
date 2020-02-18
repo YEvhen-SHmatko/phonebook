@@ -9,11 +9,11 @@ import { MUTE_NUMBER } from '../../services/constants';
 const removeWithLocalStorage = (contacts, id) => {
   return contacts.filter(contact => contact.id !== id);
 };
-const ContactList = ({ сontacts, filterContacts, removeContact }) => {
+const ContactList = ({ contacts, filterContacts, removeContact }) => {
   const clickDelete = btnContact => {
     const { id } = btnContact.currentTarget;
     removeContact(id);
-    saveToLocalStorage('contacts', removeWithLocalStorage(сontacts, id));
+    saveToLocalStorage('contacts', removeWithLocalStorage(contacts, id));
   };
 
   return (
@@ -50,7 +50,7 @@ const ContactList = ({ сontacts, filterContacts, removeContact }) => {
 };
 ContactList.propTypes = {
   filterContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
-  сontacts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeContact: PropTypes.func.isRequired,
 };
 
