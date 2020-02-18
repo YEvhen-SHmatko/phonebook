@@ -7,6 +7,7 @@ const mapStateToProps = store => ({
   contacts: selectors.getContacts(store),
 });
 const mapDispatchToProps = {
+  setContactsWithLocalStorage: contactsActions.setContactsWithLocalStorage,
   addContact: contactsActions.addContact,
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

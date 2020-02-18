@@ -7,16 +7,8 @@ import Styles from './App.module.css';
 import Title from '../Title/Title';
 import Notice from '../Notice/Notice';
 import '../../transition/pnotify-style.css';
-import { getToLocalStorage } from '../../services/localStorage';
 
-const App = ({
-  setContactsWithLocalStorage,
-  contactsLength,
-  filterContactsLength,
-}) => {
-  const storage = getToLocalStorage('contacts');
-  if (storage !== null) setContactsWithLocalStorage(storage);
-
+const App = ({ contactsLength, filterContactsLength }) => {
   return (
     <section className={Styles.section}>
       <Title size={34} animation>
@@ -40,6 +32,5 @@ const App = ({
 App.propTypes = {
   contactsLength: PropTypes.number.isRequired,
   filterContactsLength: PropTypes.number.isRequired,
-  setContactsWithLocalStorage: PropTypes.func.isRequired,
 };
 export default App;

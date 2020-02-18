@@ -6,7 +6,10 @@ import Notification from '../Information/Information';
 import { ALL_ID, SET_ERROR, IS_ACTIVE_BTN } from '../../services/constants';
 import pop from '../../transition/pop.module.css';
 import Styles from './ContactForm.module.css';
-import { saveToLocalStorage } from '../../services/localStorage';
+import {
+  saveToLocalStorage,
+  getToLocalStorage,
+} from '../../services/localStorage';
 import notification from '../../services/notification';
 
 const INITIAL_STATE = {
@@ -20,6 +23,7 @@ const INITIAL_STATE = {
 
 class ContactForm extends Component {
   static propTypes = {
+    setContactsWithLocalStorage: PropTypes.func.isRequired,
     addContact: PropTypes.func.isRequired,
     contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   };
@@ -27,6 +31,12 @@ class ContactForm extends Component {
   state = {
     ...INITIAL_STATE,
   };
+
+  componentDidMount() {
+    const { setContactsWithLocalStorage } = this.props;
+    const storage = getToLocalStorage('contacts');
+    if (storage !== null) setContactsWithLocalStorage(storage);
+  }
 
   handleChange = e => {
     const { error } = this.state;
