@@ -4,47 +4,52 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group';
 import Styles from './ContactList.module.css';
 import slide from '../../transition/slide.module.css';
 import { saveToLocalStorage } from '../../services/localStorage';
-import { MUTE_NUMBER } from '../../services/constants';
+import Title from '../Title/Title';
+import FilterContainer from '../Filter/FilterContainer';
+import Notice from '../Notice/Notice';
+import ContactListItems from './ContactListItems';
 
 const removeWithLocalStorage = (contacts, id) => {
   return contacts.filter(contact => contact.id !== id);
 };
-const ContactList = ({ contacts, filterContacts, removeContact }) => {
+const ContactList = ({
+  contacts,
+  filterContacts,
+  removeContact,
+  handleChange,
+}) => {
   const clickDelete = btnContact => {
     const { id } = btnContact.currentTarget;
     removeContact(id);
     saveToLocalStorage('contacts', removeWithLocalStorage(contacts, id));
   };
-
+  if (contacts.length === 1) {
+    handleChange('');
+  }
   return (
     <>
-      <TransitionGroup component="ul" className={Styles.list}>
-        {filterContacts.map(contact => (
-          <CSSTransition
-            key={contact.id}
-            timeout={250}
-            unmountOnExit
-            classNames={slide}
-          >
-            <li key={contact.id} className={Styles.item}>
-              <div className={Styles['item-wrap']}>
-                <span className={Styles['item-name']}>{contact.name}:</span>
-                <span className={Styles['item-number']}>
-                  {MUTE_NUMBER(contact.number)}
-                </span>
-              </div>
-              <button
-                id={contact.id}
-                className={Styles.button}
-                type="button"
-                onClick={clickDelete}
+      <Title size={24}>Contacts</Title>
+      {contacts.length > 0 && (
+        <>
+          {contacts.length > 1 && <FilterContainer />}
+          <TransitionGroup component="ul" className={Styles.list}>
+            {filterContacts.map(contact => (
+              <CSSTransition
+                key={contact.id}
+                timeout={250}
+                unmountOnExit
+                classNames={slide}
               >
-                <i className="large material-icons">backspace</i>
-              </button>
-            </li>
-          </CSSTransition>
-        ))}
-      </TransitionGroup>
+                <ContactListItems data={contact} onClick={clickDelete} />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </>
+      )}
+      {contacts.length < 1 && <Notice>Contact list is empty!</Notice>}
+      {filterContacts.length < 1 && contacts.length > 0 && (
+        <Notice>Contact not found!</Notice>
+      )}
     </>
   );
 };
@@ -52,6 +57,7 @@ ContactList.propTypes = {
   filterContacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   contacts: PropTypes.arrayOf(PropTypes.object).isRequired,
   removeContact: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default ContactList;

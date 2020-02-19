@@ -17,27 +17,3 @@ input[type='number']::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
-
-.section {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 0 auto;
-}
-.wrapTitle {
-  width: 100%;
-  min-width: 320px;
-  max-width: 480px;
-  padding: 0 10px;
-}
-.title {
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
-  font-size: 40px;
-  padding: 10px 10px 0 0;
-}
-.subTitle {
-  composes: title;
-  font-size: 32px;
-}

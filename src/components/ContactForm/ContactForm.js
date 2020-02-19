@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { CSSTransition } from 'react-transition-group';
 import shortid from 'shortid';
 import Notification from '../Information/Information';
-import { ALL_ID, SET_ERROR, IS_ACTIVE_BTN } from '../../services/constants';
+import { ALL_ID, errorHandler, IS_ACTIVE_BTN } from '../../services/constants';
 import pop from '../../transition/pop.module.css';
 import Styles from './ContactForm.module.css';
 import {
@@ -40,19 +40,20 @@ class ContactForm extends Component {
 
   handleChange = e => {
     const { error } = this.state;
-    this.setState({ [e.target.name]: e.target.value });
-    this.setState(SET_ERROR(e.target, 'name', error));
-    this.setState(SET_ERROR(e.target, 'number', error));
+    this.setState({
+      [e.target.name]: e.target.value,
+      error: errorHandler(e.target, error),
+    });
   };
 
   handleSubmit = e => {
     e.preventDefault();
     const { addContact, contacts } = this.props;
     const { name, number } = this.state;
-    const find = contacts.find(
+    const isContactExits = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase(),
     );
-    if (find) {
+    if (isContactExits) {
       notification(name);
       return;
     }
@@ -69,7 +70,7 @@ class ContactForm extends Component {
   render() {
     const { nameId, numberId } = ALL_ID;
     const { name, number, error } = this.state;
-    const isActive = IS_ACTIVE_BTN(error.name, error.number);
+    const isActive = IS_ACTIVE_BTN(error);
     const btnStyles = isActive ? Styles.disabled : Styles.button;
     return (
       <CSSTransition in timeout={250} unmountOnExit classNames={pop}>

@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import 'pnotify/dist/PNotifyBrightTheme.css';
-import AppContainer from './components/App/AppContainer';
+import './styles/styles.css';
+import App from './components/App/App';
 import store from './redux/store';
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer />
+    <App />
   </Provider>,
   document.getElementById('root'),
 );

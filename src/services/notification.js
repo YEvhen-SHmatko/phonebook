@@ -10,7 +10,7 @@ const notification = name => {
       out_class: 'bounceOutUp',
     },
     animate_speed: 250,
-    delay: 3000,
+    delay: 2500,
   });
 };
 export default notification;

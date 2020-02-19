@@ -5,14 +5,14 @@ import pop from '../../transition/pop.module.css';
 import Styles from './Filter.module.css';
 import { ALL_ID } from '../../services/constants';
 
-const Filter = ({ input, handleChange }) => {
+const Filter = ({ onChangeValue, handleChange }) => {
   const handleOnChange = e => {
     handleChange(e.target.value);
   };
   const handleOnSubmit = e => {
     e.preventDefault();
   };
-  const handleOnClean = e => {
+  const handleOnClean = () => {
     handleChange('');
   };
   return (
@@ -25,13 +25,13 @@ const Filter = ({ input, handleChange }) => {
               <input
                 className={Styles.form__input}
                 onChange={handleOnChange}
-                value={input}
+                value={onChangeValue}
                 autoComplete="off"
                 name="input"
                 type="text"
                 placeholder="Input fined contacts"
               />
-              {input.length > 0 && (
+              {onChangeValue.length > 0 && (
                 <button
                   type="button"
                   tabIndex={0}
@@ -49,7 +49,7 @@ const Filter = ({ input, handleChange }) => {
   );
 };
 Filter.propTypes = {
-  input: PropTypes.string.isRequired,
+  onChangeValue: PropTypes.string.isRequired,
   handleChange: PropTypes.func.isRequired,
 };
 export default Filter;

@@ -4,7 +4,7 @@ import * as selectors from '../../redux/selectors';
 import Filter from './Filter';
 
 const mapStateToProps = store => ({
-  input: selectors.getFilter(store),
+  onChangeValue: selectors.getFilter(store),
 });
 const mapDispatchToProps = {
   handleChange: filterActions,

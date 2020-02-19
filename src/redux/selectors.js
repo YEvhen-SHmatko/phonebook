@@ -13,5 +13,3 @@ export const getFilterContacts = createSelector(
       contact.name.toLowerCase().includes(filter.toLowerCase()),
     ),
 );
-export const getContactsLength = store => getContacts(store).length;
-export const getFilterContactsLength = store => getFilterContacts(store).length;
